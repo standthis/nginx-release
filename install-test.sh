@@ -36,8 +36,10 @@ export BOSH_ENVIRONMENT=vbox
 
 echo "-----> `date`: Set ip route for local route to VM"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo Linux detected
     sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo Mac OS X detected
     sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X
 else
     echo OS undetected! Please enter relevant command bellow.
@@ -45,6 +47,7 @@ else
     sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
     sudo route add -net 10.244.0.0/16 gw  192.168.50.6 # Linux (using DEPRECATED route command)
     route add           10.244.0.0/16     192.168.50.6 # Windows"
+fi
     
 echo "-----> `date`: Update Cloud config"
 bosh -e vbox update-cloud-config ~/workspace/bosh-deployment/warden/cloud-config.yml
