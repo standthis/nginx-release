@@ -9,7 +9,7 @@ static webpage protected by basic authentication.
 
 ## Instructions
 
-The release can be deployed using Bosh-cli and tested with curl.
+The release can be deployed using BOSH-cli and tested with curl.
 
 curl -u admin:supersecretpassword -i http://10.244.0.2
 
@@ -18,7 +18,7 @@ This command assumes setting of local route for accessing VM directly:
 sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X  
 sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux 
 
-If Bosh Lite is not configured or installed see installation instructions below
+If BOSH Lite is not configured or installed see installation instructions below
 
 ## Installation
 
