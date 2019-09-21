@@ -4,7 +4,7 @@ Completed for anynines homework task.
 
 ## Description
 
-nginx-release provides a bosh release for nginx web server that displays a 
+nginx-release provides a BOSH release for nginx web server that displays a 
 static webpage protected by basic authentication. 
 
 ## Instructions
