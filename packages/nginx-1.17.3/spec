@@ -1,0 +1,7 @@
+---
+name: nginx-1.17.3
+
+files:
+- nginx-1.17.3.tar.gz # https://nginx.org/download/
+- headers-more-nginx-module-0.30.tar.gz
+- pcre-8.42.tar.gz
