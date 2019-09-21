@@ -15,7 +15,7 @@ curl -u admin:supersecretpassword -i http://10.244.0.2
 
 This command assumes setting of local route for accessing VM directly:
 
-sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X
+sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X  
 sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux 
 
 If Bosh Lite is not configured or installed see installation instructions below
@@ -27,6 +27,6 @@ configuration of BOSH Lite v2 run the included install-test.sh
 
 Dependencies:
 
-VirtualBox 5.1+ 
+VirtualBox 5.1+    
 bosh-cli #https://github.com/cloudfoundry/bosh-cli/releases
 
