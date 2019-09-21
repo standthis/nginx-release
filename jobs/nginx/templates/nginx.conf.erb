@@ -1,0 +1,27 @@
+user nobody vcap; # group vcap can read most directories
+worker_processes 8;
+
+error_log /var/vcap/sys/log/nginx/error.log info;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+  include /var/vcap/packages/nginx-1.17.3/conf/mime.types;
+  default_type  application/octet-stream;
+  sendfile on;
+  keepalive_timeout  65;
+  server_names_hash_bucket_size 512;
+
+  server {
+    listen 80;
+    access_log /var/vcap/sys/log/nginx/access.log;
+    auth_basic           "Administrator’s Area";
+    auth_basic_user_file /var/vcap/jobs/nginx/conf/.htpasswd;
+
+    location / {
+      root /var/vcap/jobs/nginx/nginx-root;
+    }
+  }
+}
