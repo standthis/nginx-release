@@ -4,6 +4,8 @@ name: nginx
 releases:
 - name: nginx
   version: latest
+- name: go-webapp
+  version: latest
 
 update:
   canaries: 1
@@ -27,3 +29,14 @@ instance_groups:
   networks:
   - name: default
   stemcell: default
+
+- name: go-webapp
+  azs: [z1, z2, z3]
+  instances: 2
+  jobs:
+  - name: app
+    release: go-webapp
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
