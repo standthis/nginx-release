@@ -30,3 +30,13 @@ Dependencies:
 VirtualBox 5.1+    
 bosh-cli #https://github.com/cloudfoundry/bosh-cli/releases
 
+## Bonus 
+
+go-webapp development branch contains an implementation of nginx as a load
+balancer that consumes links provided by the simple go-webapp BOSH release
+
+https://github.com/standthis/go-webapp-release
+
+ 
+
+
