@@ -11,4 +11,8 @@ templates:
 packages:
 - nginx-1.17.3
 
+consumes:
+- name: backend_servers
+  type: http
+
 properties: {}
