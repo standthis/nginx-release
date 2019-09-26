@@ -4,7 +4,7 @@ Completed for anynines homework task.
 
 ## Description
 
-nginx-release provides a bosh release for nginx web server that displays a 
+nginx-release provides a BOSH release for nginx web server that displays a 
 static webpage protected by basic authentication. 
 
 ## Instructions
@@ -18,7 +18,7 @@ This command assumes setting of local route for accessing VM directly:
 sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X  
 sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux 
 
-If Bosh Lite is not configured or installed see installation instructions below
+If BOSH Lite is not configured or installed see installation instructions below
 
 ## Installation
 
