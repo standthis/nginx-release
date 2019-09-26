@@ -1,4 +1,10 @@
 builds:
+<<<<<<< HEAD
   8ad92ae0-ada3-458f-7501-f7e7d7783524:
+=======
+  2b15898e-6c45-45fe-7049-20f7be691890:
+    version: "2"
+  55f23841-516f-45ce-517a-2a154ba62978:
+>>>>>>> nginx load balancer final release
     version: "1"
 format-version: "2"
