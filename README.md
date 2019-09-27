@@ -4,26 +4,22 @@ Completed for anynines homework task.
 
 ## Description
 
-nginx-release provides a BOSH release for nginx web server that displays a 
+nginx-release provides a BOSH release for a Nginx web server that displays a 
 static webpage protected by basic authentication. 
 
 ## Instructions
 
-The release can be deployed using Bosh-cli and tested with curl.
+The release is deployed using Bosh-cli and BOSH lite as a director VM running
+locally. 
 
-curl -u admin:supersecretpassword -i http://10.244.0.2
-
-This command assumes setting of local route for accessing VM directly:
-
-sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X  
-sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux 
+The deployment can be tested by running `run-test.sh`
 
 If BOSH Lite is not configured or installed see installation instructions below
 
 ## Installation
 
 For automated deployment and testing of the release including installation and 
-configuration of BOSH Lite v2 run the included install-test.sh
+configuration of BOSH Lite v2 run the included `install-test.sh`.
 
 Dependencies:
 
@@ -32,11 +28,8 @@ bosh-cli #https://github.com/cloudfoundry/bosh-cli/releases
 
 ## Bonus 
 
-go-webapp development branch contains an implementation of nginx as a load
-balancer that consumes links provided by the simple go-webapp BOSH release
+go-webapp development branch contains an implementation of Nginx as a load
+balancer that consumes links provided by the simple go-webapp BOSH release.
 
 https://github.com/standthis/go-webapp-release
-
- 
-
 
