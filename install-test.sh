@@ -49,7 +49,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo Linux detected
     # Add check if ip route exist
     EXIST=`ip route show 10.244.0.0/16 via 192.168.50.6 | wc -l`
-    if [ $EXIST -ne 0 ]; then
+    if [ $EXIST -eq 0 ]; then
         sudo ip route add 10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
