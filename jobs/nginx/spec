@@ -6,6 +6,7 @@ templates:
   nginx.conf.erb: conf/nginx.conf
   htpasswd: conf/.htpasswd
   index.html: nginx-root/index.html
+  run: bin/run
 
 packages:
 - nginx-1.17.3

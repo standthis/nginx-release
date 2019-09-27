@@ -9,7 +9,6 @@ fi
 
 pushd .
 
-
 echo "-----> `date`: Install director VM if non-existent"
 if [ ! -e ~/deployments/vbox ]; then
     git clone https://github.com/cloudfoundry/bosh-deployment ~/workspace/bosh-deployment
@@ -18,6 +17,7 @@ fi
 mkdir -p ~/deployments/vbox
 cd ~/deployments/vbox
 
+echo "-----> `date`: Backup creds if exist"
 [ -e creds.yml ] && mkdir backup && mv creds.yml backup
 [ -e state.json ] && mv state.json backup
 
@@ -44,25 +44,6 @@ export BOSH_CLIENT_SECRET=`bosh int ./creds.yml --path /admin_password`
 bosh alias-env vbox -e 192.168.50.6 --ca-cert <(bosh int ./creds.yml --path /director_ssl/ca)
 export BOSH_ENVIRONMENT=vbox
 
-echo "-----> `date`: Set ip route for local route to VM"
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo Linux detected
-    # Add check if ip route exist
-    EXIST=`ip route show 10.244.0.0/16 via 192.168.50.6 | wc -l`
-    if [ $EXIST -eq 0 ]; then
-        sudo ip route add 10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
-    fi
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo Mac OS X detected
-    sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X
-else
-    echo OS undetected! Please enter relevant command bellow.
-    echo "sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X
-    sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
-    sudo route add -net 10.244.0.0/16 gw  192.168.50.6 # Linux (using DEPRECATED route command)
-    route add           10.244.0.0/16     192.168.50.6 # Windows"
-fi
-    
 echo "-----> `date`: Update Cloud config"
 bosh -e vbox update-cloud-config ~/workspace/bosh-deployment/warden/cloud-config.yml
 
@@ -76,13 +57,13 @@ bosh -n -d nginx delete-deployment --force
 echo "-----> `date`: Deploy"
 popd 
 bosh upload-release
-bosh -d nginx deploy examples/nginx.yml
+( set -e; bosh -n -d nginx deploy ../examples/nginx.yml )
 
 sleep 5
-echo "-----> `date`: Test nginx authorization"
-curl -u admin:supersecretpassword -i http://10.244.0.2
+echo "-----> `date`: Test nginx authorization using run-errand"
+bosh -n -d nginx run-errand nginx
 
-echo "-----> `date`: Delete deployments"
+echo "-----> `date`: Delete deployment"
 bosh -n -d nginx delete-deployment --force
 
 echo "-----> `date`: Done"

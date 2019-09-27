@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sleep 5
+echo 
+curl -i -u admin:supersecretpassword http://localhost 
+echo 
