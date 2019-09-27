@@ -1,8 +1,13 @@
 builds:
+<<<<<<< HEAD
   05963f87-f186-4f29-5eec-99df9d30e6b4:
     version: "3"
   17d881d3-9a39-408d-57f6-4b31e0525f0f:
     version: "4"
+=======
+  2b15898e-6c45-45fe-7049-20f7be691890:
+    version: "2"
+>>>>>>> c703a86f171ed60c9c88204e98934954b9894bbb
   55f23841-516f-45ce-517a-2a154ba62978:
     version: "1"
   e8ca9714-0d35-4de6-516e-c7b613f32cbf:
