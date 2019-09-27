@@ -1,7 +1,14 @@
 #!/bin/bash
 set -e # -x
 
+running=`vboxmanage list runningvms | wc -l`
+if [ $running -ne 0 ]; then
+    echo Saving state of currently running VMs
+    vboxmanage list runningvms | sed -r 's/.*\{(.*)\}/\1/' | xargs -L1 -I {} VBoxManage controlvm {} savestate
+fi
+
 pushd .
+
 
 echo "-----> `date`: Install director VM if non-existent"
 if [ ! -e ~/deployments/vbox ]; then
@@ -10,6 +17,9 @@ fi
 
 mkdir -p ~/deployments/vbox
 cd ~/deployments/vbox
+
+[ -e creds.yml ] && mkdir backup && mv creds.yml backup
+[ -e state.json ] && mv state.json backup
 
 echo "-----> `date`: Create environment for BOSH-lite"
 bosh create-env ~/workspace/bosh-deployment/bosh.yml \
@@ -37,7 +47,11 @@ export BOSH_ENVIRONMENT=vbox
 echo "-----> `date`: Set ip route for local route to VM"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo Linux detected
-    sudo ip route add   10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
+    # Add check if ip route exist
+    EXIST=`ip route show 10.244.0.0/16 via 192.168.50.6 | wc -l`
+    if [ $EXIST -ne 0 ]; then
+        sudo ip route add 10.244.0.0/16 via 192.168.50.6 # Linux (using iproute2 suite)
+    fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo Mac OS X detected
     sudo route add -net 10.244.0.0/16     192.168.50.6 # Mac OS X
