@@ -1,1 +1,6 @@
-name: nginx
+---
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/nginx-blobs
+final_name: nginx
